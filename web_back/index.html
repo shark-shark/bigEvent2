@@ -105,46 +105,43 @@
     </script>
 
     <script>
-        // 入口函数
-        $(function(){
+         // 入口函数
+         $(function(){
 
-            //登出功能
-            //1.给退出按钮设置点击事件.
-            $('.icon-tuichu').parent().on('click',function(e){
-                e.preventDefault();
-                //2.发送ajax请求.
-                $.post({
-                    url:'http://localhost:8000/admin/logout',
-                    success:function(backData){
-                        //判断
-                        if(backData.code == 200){
-                            window.location.href = './login.html';
-                        }
-                    }
-                });
-            });
+//登出功能
+//1.给退出按钮设置点击事件.
+$('.icon-tuichu').parent().on('click',function(e){
+    e.preventDefault();
+    //2.发送ajax请求.
+    $.post({
+        url:'http://localhost:8000/admin/logout',
+        success:function(backData){
+            //判断
+            if(backData.code == 200){
+                window.location.href = './login.html';
+            }
+        }
+    });
+});
 
 
-            //获取登录管理员的个人信息.
-            $.ajax({
-                type:'get',
-                url:'http://localhost:8000/admin/getuser',
-                success : function(backData){
-                    //判断
-                    if(backData.code == 200){
-                        //把对应的名字还有头像显示在对应的标签中.
-                        $('.user_info').children('span').html('欢迎&nbsp;&nbsp;'+backData.data.nickname);
-                        $('.user_info').children('img').attr('src',backData.data.user_pic);
+//获取登录管理员的个人信息.
+$.ajax({
+    type:'get',
+    url:'http://localhost:8000/admin/getuser',
+    success : function(backData){
+        //判断
+        if(backData.code == 200){
+            //把对应的名字还有头像显示在对应的标签中.
+            $('.user_info').children('span').html('欢迎&nbsp;&nbsp;'+backData.data.nickname);
+            $('.user_info').children('img').attr('src',backData.data.user_pic);
 
-                        $('.user_center_link').children('img').attr('src',backData.data.user_pic);
-                    }
+            $('.user_center_link').children('img').attr('src',backData.data.user_pic);
+        }
 
-                }
-            })
-
-            //$('body').html("");
-
-        });
+    }
+})
+});
     </script>
 </body>
 </html>
